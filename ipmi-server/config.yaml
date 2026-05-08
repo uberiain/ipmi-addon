@@ -1,9 +1,9 @@
 ---
-name: "IPMItool server (UB)"
+name: "IPMItool server (TEST)"
 version: "1.0.0"
 slug: "ipmi-server"
 description: "IPMItool server"
-url: "https://github.com/uberiain/home-assistant-addons"
+url: "https://github.com/uberiain/ipmi-addon"
 arch:
   - aarch64
   - amd64
