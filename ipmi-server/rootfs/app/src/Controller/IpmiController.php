@@ -252,7 +252,7 @@ class IpmiController
         else {
             $response = $this->getDeviceInfoByInterface($request, $interface);
         }
-
+        error_log("Aqui estamos".$response);
         return $response;
     }
 
