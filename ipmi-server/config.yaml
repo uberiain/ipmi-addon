@@ -1,8 +1,8 @@
 ---
 name: "IPMItool server (TEST)"
 version: "1.0.0"
-slug: "ipmi-server"
-description: "IPMItool server"
+slug: "ipmi-server-test"
+description: "IPMItool server test"
 url: "https://github.com/uberiain/ipmi-addon"
 arch:
   - aarch64
@@ -26,4 +26,4 @@ ports:
 ports_description:
   80/tcp: "Not required for Ingress"
 
-image: "ghcr.io/uberiain/ipmi-server/{arch}"
+image: "ghcr.io/uberiain/ipmi-server-test/{arch}"
