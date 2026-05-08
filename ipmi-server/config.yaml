@@ -1,6 +1,6 @@
 ---
 name: "IPMItool server (TEST)"
-version: "1.0.0"
+version: "1.1.rc1"
 slug: "ipmi-server-test"
 description: "IPMItool server test"
 url: "https://github.com/uberiain/ipmi-addon"
