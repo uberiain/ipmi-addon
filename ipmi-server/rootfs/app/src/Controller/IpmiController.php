@@ -49,7 +49,7 @@ class IpmiController
         if (array_key_exists('message', $info)) {
             $info['message'] = $this->anonymizePassword($info['message']);
         }
-        debug_to_console($info);
+        error_log("Soy yo: ".$info);
         
         return new JsonResponse($info);
     }
