@@ -49,7 +49,8 @@ class IpmiController
         if (array_key_exists('message', $info)) {
             $info['message'] = $this->anonymizePassword($info['message']);
         }
-
+        debug_to_console($info);
+        
         return new JsonResponse($info);
     }
 
@@ -556,5 +557,12 @@ class IpmiController
         ];
     }
 
+    function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
 
+    echo "<script>output.log('Debug Objects: " . $output . "' );</script>";
+    }
+ 
 }
