@@ -33,7 +33,9 @@ class IpmiController
 
     public function index(Request $request): JsonResponse
     {
-        $this->password = $request->query->get('password', '');
+		error_log("Veamos que es: ".implode("\n", $request));
+        
+		$this->password = $request->query->get('password', '');
         $info = $this->getDeviceInfo($request);
 
         if ($info['success']) {
@@ -49,8 +51,6 @@ class IpmiController
         if (array_key_exists('message', $info)) {
             $info['message'] = $this->anonymizePassword($info['message']);
         }
-		
-		error_log(new JsonResponse($info));
 		
         return new JsonResponse($info);
     }
