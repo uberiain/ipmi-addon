@@ -253,7 +253,6 @@ class IpmiController
         else {
             $response = $this->getDeviceInfoByInterface($request, $interface);
         }
-        error_log("Aqui estamos".$response);
         return $response;
     }
 
@@ -562,7 +561,7 @@ class IpmiController
     if (is_array($output))
         $output = implode(',', $output);
 
-    echo "<script>output.log('Debug Objects: " . $output . "' );</script>";
+    error_log($output);
     }
  
 }
