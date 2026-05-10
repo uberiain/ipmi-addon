@@ -33,7 +33,7 @@ class IpmiController
 
     public function index(Request $request): JsonResponse
     {
-		error_log("Veamos que es: ".implode("\n", $request));
+		error_log("Veamos que es: ".$request);
         
 		$this->password = $request->query->get('password', '');
         $info = $this->getDeviceInfo($request);
