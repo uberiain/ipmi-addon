@@ -97,15 +97,7 @@ class IpmiController
         return $this->runChassisCommand($request, 'soft');
     }
     
-	public function debug_to_console($data)
-	{
-        $output = $data;
-        if (is_array($output))
-            $output = implode(',', $output);
-
-        error_log($output);
-    }
- 
+	
     private function generateId($name): string
     {
         $id = preg_replace("/[^A-Za-z0-9 _]/", '', $name);
