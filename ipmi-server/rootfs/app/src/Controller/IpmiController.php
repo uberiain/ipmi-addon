@@ -49,8 +49,9 @@ class IpmiController
         if (array_key_exists('message', $info)) {
             $info['message'] = $this->anonymizePassword($info['message']);
         }
-        error_log("Soy yo: ".$info);
-        
+		
+		error_log(new JsonResponse($info));
+		
         return new JsonResponse($info);
     }
 
