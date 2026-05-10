@@ -97,7 +97,8 @@ class IpmiController
         return $this->runChassisCommand($request, 'soft');
     }
     
-   private function debug_to_console($data) {
+	private function debug_to_console($data)
+	{
         $output = $data;
         if (is_array($output))
             $output = implode(',', $output);
