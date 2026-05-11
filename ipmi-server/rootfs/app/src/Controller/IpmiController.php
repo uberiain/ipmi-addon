@@ -277,15 +277,14 @@ class IpmiController
                 if ($ret) {
 										
                     $results = explode(PHP_EOL, $ret);
-                    $device = $this->extractValuesFromResults($results);
-					
-/**					
-*					(bool) $ignore_fru_rc = 1;
-*					if ($request->query->get('ignore_fru_rc') == 'False')
-*					{
-*						$ignore_fru_rc = 0;
-**/					}
-
+                    $device = $this->extractValuesFromResults($results);					
+/*					
+ 					(bool) $ignore_fru_rc = 1;
+ 					if ($request->query->get('ignore_fru_rc') == 'False')
+ 					{
+ 						$ignore_fru_rc = 0;
+					}
+*/
 					$ignore_fru_rc = ($request->query->get('ignore_fru_rc') == 'True') ? 1 : 0;
 					error_log("Valor del ignore : -->".$ignore_fru_rc);
 					
