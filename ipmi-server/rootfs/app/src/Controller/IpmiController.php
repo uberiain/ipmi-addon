@@ -280,16 +280,17 @@ class IpmiController
                     $device = $this->extractValuesFromResults($results);
 					
 					
-					(bool) $ignore_fru_rc = true;
+					(bool) $ignore_fru_rc = 1;
 
 					if ($request->query->get('ignore_fru_rc') == 'False')
 					{
-						$ignore_fru_rc = false;
+						$ignore_fru_rc = 0;
 					}
 					
 					error_log("Veamos el ignore_fru_rc : ".$ignore_fru_rc);
 					
                     $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'fru']), $ignore_fru_rc);
+					
 					error_log("Retorno del FRU ".$ret);
 					
                     if ($ret) {
