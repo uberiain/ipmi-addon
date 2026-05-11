@@ -28,13 +28,12 @@ class IpmiController
     ];
     private array $debug = [];
     private string $password = '';
-    const COMMAND_TIMEOUT = 50;
+	const COMMAND_TIMEOUT = 50;
     const DEFAULT_PORT = 623;
 
     public function index(Request $request): JsonResponse
     {
-		error_log("Veamos que es: ".$request);
-        
+		        
 		$this->password = $request->query->get('password', '');
         $info = $this->getDeviceInfo($request);
 
@@ -260,6 +259,9 @@ class IpmiController
 
     private function getDeviceInfoByInterface(Request $request, string $interface): array
     {
+		
+		error_log("Estamos en getDeviceInfoByInterface: -> ".$request);
+		
         $response = [
             'success' => false
         ];
@@ -276,10 +278,15 @@ class IpmiController
                 $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'bmc', 'info']));
 
                 if ($ret) {
+					
+					
                     $results = explode(PHP_EOL, $ret);
                     $device = $this->extractValuesFromResults($results);
-
-                    $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'fru']), true);
+					
+					bool $ignore_fru_rc = $request->query->get('ignore_fru_rc', true);
+					error_log("Veamos el ignore_fru_rc : ".$ignore_fru_rc);
+					
+                    $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'fru']), $ignore_fru_rc);
 
                     if ($ret) {
                         $results = explode(PHP_EOL, $ret);
