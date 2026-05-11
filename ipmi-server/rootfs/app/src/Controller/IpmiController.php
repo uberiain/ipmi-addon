@@ -284,9 +284,10 @@ class IpmiController
 *					if ($request->query->get('ignore_fru_rc') == 'False')
 *					{
 *						$ignore_fru_rc = 0;
-*					}
-**/					$ignore_fru_rc = ($request->query->get('ignore_fru_rc') == 'True') ? 1 : 0;
-					error_log("Valor del ignore : -->"-$ignore_fru_rc);
+**/					}
+
+					$ignore_fru_rc = ($request->query->get('ignore_fru_rc') == 'True') ? 1 : 0;
+					error_log("Valor del ignore : -->".$ignore_fru_rc);
 					
                     $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'fru']), $ignore_fru_rc);					
 					
