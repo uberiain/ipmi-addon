@@ -279,12 +279,14 @@ class IpmiController
                     $results = explode(PHP_EOL, $ret);
                     $device = $this->extractValuesFromResults($results);
 					
-					
-					(bool) $ignore_fru_rc = 1;
-					if ($request->query->get('ignore_fru_rc') == 'False')
-					{
-						$ignore_fru_rc = 0;
-					}
+/**					
+*					(bool) $ignore_fru_rc = 1;
+*					if ($request->query->get('ignore_fru_rc') == 'False')
+*					{
+*						$ignore_fru_rc = 0;
+*					}
+**/					$ignore_fru_rc = ($request->query->get('ignore_fru_rc') == 'True') ? 1 : 0;
+					error_log("Valor del ignore : -->"-$ignore_fru_rc);
 					
                     $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'fru']), $ignore_fru_rc);					
 					
@@ -380,7 +382,7 @@ class IpmiController
 
         if ($cmd !== false) {
             try {
-//                $response['success'] = $this->extractFromSensorCommand($cmd, $interface, $sensorData, $states);
+				
                 $response['success'] = $this->extractFromSdrCommand($cmd, $interface, $sensorData, $states);
                 $this->extractFromDcmiPowerReadingCommand($cmd, $interface, $sensorData, $states);
 
@@ -458,7 +460,7 @@ class IpmiController
                                     $id_pattern = "/^".$id."/";
                                     $id_count = count($this->preg_array_key_exists($id_pattern, $sensorData[$type]));
                                     if ($id_count > 0) {
-                                        $description .= ' ' . $id_count+1;
+                                        $description .= ' ' . ($id_count+1);
                                         $id = $this->generateId($description);
                                     }
 
@@ -517,53 +519,5 @@ class IpmiController
             }
         }
     }
-
-    private function getSensorsByType(Request $request, string $type, string $unit): array
-    {
-        $sensors = [];
-        $states = [];
-
-        $cmd = $this->getCommand($request);
-        $found = false;
-
-        if ($cmd !== false) {
-            foreach ($this->ipmiTypes as $ipmi_type) {
-                $ret = $this->runCommand(array_merge($cmd, ['-I', $ipmi_type, 'sdr', 'type', $type]));
-
-                if ($ret) {
-                    $results = explode(PHP_EOL, $ret);
-
-                    if (!empty($results)) {
-                        foreach ($results as $result) {
-                            if (!empty($result)) {
-                                $values = array_map('trim', explode('|', $result));
-                                [$description, $a, $b, $c, $value] = $values;
-                                $id = $this->generateId($description);
-
-                                if (str_contains($value, $unit)) {
-                                    $value = trim(str_replace($unit, '', $value));
-                                } else {
-                                    $value = null;
-                                }
-
-                                $sensors[$id] = $description;
-                                $states[$id] = $value;
-                            }
-                        }
-
-                        $found = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return [
-            'found' => $found,
-            'sensors' => $sensors,
-            'states' => $states
-        ];
-    }
-
-    
+   
 }
