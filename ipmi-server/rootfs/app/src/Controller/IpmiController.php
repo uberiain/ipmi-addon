@@ -259,9 +259,6 @@ class IpmiController
 
     private function getDeviceInfoByInterface(Request $request, string $interface): array
     {
-		
-		error_log("Estamos en getDeviceInfoByInterface: -> ".$request);
-		
         $response = [
             'success' => false
         ];
@@ -278,8 +275,7 @@ class IpmiController
                 $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'bmc', 'info']));
 
                 if ($ret) {
-					
-					
+										
                     $results = explode(PHP_EOL, $ret);
                     $device = $this->extractValuesFromResults($results);
 					
