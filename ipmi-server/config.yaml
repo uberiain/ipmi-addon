@@ -1,6 +1,6 @@
 ---
 name: "IPMItool server (UB)"
-version: "1.7.1"
+version: "1.7.2"
 slug: "ipmi-server (UB)"
 description: "IPMItool server (UB)"
 url: "https://github.com/uberiain/ipmi-addon"
