@@ -1,7 +1,0 @@
----
-uses: smartsquaregmbh/delete-old-packages@v1.0.0
-with:
-  organization: RUNTIME
-  type: npm
-  names: |
-    ipmi-server-test/amd64
